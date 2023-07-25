@@ -1,0 +1,14 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t docker-react -f Dockerfile.dev .
+
+# note that npm run test should exit after the first run
+# script:
+#  - docker run docker-react npm run test -- --coverage
+
+script:
+ - docker run -e CI=true docker-react npm run test
